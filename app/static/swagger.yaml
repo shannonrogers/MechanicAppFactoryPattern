@@ -1,0 +1,608 @@
+
+swagger: '2.0'
+info: 
+  title: "Mechanic Shop API"
+  description: "Management from the shop's perspective"
+  version: "0.0.1"
+
+host: "127.0.0.1:5000" #during development my API i on local host, will change in prod
+schemes: 
+  - "http"
+consumes: 
+  - "application/json"
+produces: 
+  - "application/json"
+
+securityDefinitions: 
+  bearerAuth: 
+    type: apiKey
+    name: Authorization
+    in: header
+
+paths: #information about routes
+
+  /mechanics/login:
+    post: 
+      tags: 
+        - Mechanics
+      summary: "Login endpoint (generates token)"
+      description: "Validates mechanic credentials, produces a mechanic specific token"
+      parameters: #don't forget the s in parameters
+        - in: "body"
+          name: "body"
+          description: "Login Credentials"
+          required: true
+          schema: 
+            $ref: "#/definitions/LoginCredentials"
+      responses: 
+        200: 
+          description: "Login Successful"
+          schema: 
+            $ref: "#/definitions/LoginResponse"
+
+  /mechanics:
+    post:
+      tags:
+        - Mechanics
+      summary: "Create a new mechanic"
+      description: "Creates a mechanic account (requires token)."
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/MechanicInput"
+      responses:
+        201:
+          description: "Mechanic created successfully"
+          schema:
+            $ref: "#/definitions/Mechanic"
+     
+    get:
+      tags:
+        - Mechanics
+      summary: "Read all mechanics"
+      description: "Retrieve details for all mechanics"
+      responses:
+        200:
+          description: "List of Mechanic details"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Mechanic"
+
+    delete:
+      tags:
+        - Mechanics
+      summary: "Delete the mechanic (token required)"
+      description: "Deletes the mechanic linked to the provided token."
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Mechanic deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+
+  /mechanics/{mechanic_id}:
+    get:
+      tags:
+        - Mechanics
+      summary: "Get mechanic by ID"
+      description: "Retrieve a specific mechanic based on ID passed in"
+      parameters:
+        - in: "path"
+          name: "mechanic_id"
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Mechanic details"
+          schema:
+            $ref: "#/definitions/Mechanic"
+
+    put:
+      tags:
+        - Mechanics
+      summary: "Update mechanic"
+      description: "Update a mechanic’s details (requires token)."
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "mechanic_id"
+          in: "path"
+          required: true
+          type: integer
+        - in: "body"
+          name: "body"
+          description: "all data for mechanic including updates"
+          required: true
+          schema:
+            $ref: "#/definitions/MechanicInput"
+      responses:
+        200:
+          description: "Mechanic updated successfully"
+          schema:
+            $ref: "#/definitions/Mechanic"
+
+  /customers:
+    get:
+      tags:
+        - Customers
+      summary: "returns all customers"
+      responses:
+        200:
+          description: "List of customer details"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Customer"
+
+    post:
+      tags:
+        - Customers
+      summary: "Create a new customer"
+      description: "Creates a new customer using data submitted, token required"
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "all data necessary to create customer"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerInput"
+      responses:
+        201:
+          description: "Customer created"
+          schema:
+            $ref: "#/definitions/Customer"
+
+  /customers/{customer_id}:
+    get:
+      tags:
+        - Customers
+      summary: "Get customer by ID"
+      description: "Returns a single customer based on ID"
+      parameters:
+        - name: "customer_id"
+          in: "path"
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Returns customer details"
+          schema:
+            $ref: "#/definitions/Customer"
+      
+    put:
+      tags:
+        - Customers
+      summary: "Update customer"
+      description: "Updates a single customer based on ID, token required"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "customer_id"
+          in: "path"
+          required: true
+          type: integer
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerInput"
+      responses:
+        200:
+          description: "updated customer details"
+          schema:
+            $ref: "#/definitions/Customer"
+
+    delete:
+      tags:
+        - Customers
+      summary: "Delete customer"
+      description: "deletes a single customer based on ID, token required"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "customer_id"
+          in: "path"
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Successfully deleted customer"
+      
+  /customers/searchcustomers/{customer_email}:
+    get: 
+      tags: 
+        - Customers
+      summary: "Search Customer by email"
+      description: "Returns single customer based on email if in system"
+      parameters: 
+        - in: "path"
+          name: "customer_email"
+          required: true
+          type: string
+      repsonses: 
+        200:
+          description: "Returns customer details"
+          schema:
+            $ref: "#/definitions/Customer"
+
+  /services:
+    post:
+      tags:
+        - Services
+      summary: "Create a new service ticket"
+      description: "Creates a new service record, token required"
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Details required to create service"
+          required: true
+          schema:
+            $ref: "#/definitions/ServiceInput"
+      responses:
+        201:
+          description: "Returns service details"
+          schema:
+            $ref: "#/definitions/Service"
+
+    get:
+      tags:
+        - Services
+      summary: "Get all services"
+      description: "returns all service tickets"
+      responses:
+        200:
+          description: "List of services"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Service"
+
+  /services/{service_id}/assign-mechanic/{mechanic_id}:
+    put:
+      tags:
+        - Services
+      summary: "Assign mechanic to service"
+      description: "Assigns a mechanic to a single service ticket, token required"
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: service_id
+          in: path
+          required: true
+          type: integer
+        - name: mechanic_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Mechanic add to ticket ID"
+          schema:
+            $ref: "#/definitions/Service"
+
+
+  /services/{service_id}/remove-mechanic/{mechanic_id}:
+    put:
+      tags:
+        - Services
+      summary: "Remove mechanic from ticket_mechanic"
+      description: "Removes a mechanic from a service ticket, token required"
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: service_id
+          in: path
+          required: true
+          type: integer
+        - name: mechanic_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Mechanic removed from ticket ID"
+          schema:
+            $ref: "#/definitions/Service"
+
+
+  /services/my-tickets:
+    get:
+      tags:
+        - Services
+      summary: "Get tickets assigned to current mechanic"
+      description: "Retrieves all service tickets assigned to the logged-in mechanic, token required, ID pulled from token"
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: "List of mechanic’s tickets"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Service"
+
+  /services/{service_id}/assign-part/{part_id}:
+    put:
+      tags:
+        - Services
+      summary: "Assign part to service"
+      description: "Adds a part to a service ticket"
+      parameters:
+        - name: service_id
+          in: path
+          required: true
+          type: integer
+        - name: part_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Part added to service ID"
+          schema:
+            $ref: "#/definitions/Service"
+
+  /services/get-parts/{service_id}:
+    get:
+      tags:
+        - Services
+      summary: "Get parts assigned to a service ticket"
+      description: "Retrieves all parts linked to a specific service ticket based on service ID"
+      parameters:
+        - name: service_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "List of part details"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Part"
+
+  /parts:
+    post:
+      tags:
+        - Parts
+      summary: "Add a new part"
+      description: "creates a new part description, token required"
+      security: 
+        - BearerAuth: []
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/PartInput"
+      responses:
+        201:
+          description: "Returns new part details"
+          schema:
+            $ref: "#/definitions/Part"
+
+    get:
+      tags:
+        - Parts
+      summary: "Get all parts"
+      descriptions: "returns a all part details in the system"
+      responses:
+        200:
+          description: "List of parts"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Part"
+    
+
+  /parts/{part_id}:
+    get:
+      tags:
+        - Parts
+      summary: "Get part by part ID"
+      description: "returns a single part object based on ID"
+      parameters:
+        - name: "part_id"
+          in: "path"
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Part details"
+          schema:
+            $ref: "#/definitions/Part"
+
+    put:
+      tags:
+        - Parts
+      summary: "Update part"
+      description: "updates single part based on ID, token required"
+      security: 
+        - BearerAuth: []
+      parameters:
+        - name: "part_id"
+          in: "path"
+          required: true
+          type: integer
+        - in: "body"
+          name: "body"
+          description: "details needed to create part including updates"
+          required: true
+          schema:
+            $ref: "#/definitions/PartInput"
+      responses:
+        200:
+          description: "Part details updated"
+          schema:
+            $ref: "#/definitions/Part"
+
+    delete:
+      tags:
+        - Parts
+      summary: "Delete part"
+      description: "deletes single part from the system based on ID, token required"
+      security: 
+        - BearerAuth: []
+      parameters:
+        - name: "part_id"
+          in: "path"
+          required: true
+          type: integer
+      responses:
+        200:
+          description: "Successfully deleted part"
+
+definitions: #information about data received/produced
+
+  LoginCredentials: #input data required for mechanic login route
+    type: object
+    properties: 
+      email: 
+        type: string
+      password: 
+        type: string
+
+    required: 
+      - email
+      - password
+
+  LoginResponse: #Response from /login enpdpoint
+    type: object
+    properties: 
+      message: 
+        type: string
+      token:
+        type: string
+  
+  MechanicInput:
+    type: object
+    required:
+      - first_name
+      - last_name
+      - email
+      - password
+      - salary
+      - address
+    properties:
+      first_name:
+        type: string
+        example: "John"
+      last_name:
+        type: string
+        example: "Doe"
+      email:
+        type: string
+        example: "john@example.com"
+      password:
+        type: string
+        example: "password123"
+      salary:
+        type: number
+        format: float
+        example: 55000.00
+      address:
+        type: string
+        example: "123 Main St, Las Vegas, NV"
+
+  Mechanic:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      first_name:
+        type: string
+        example: "John"
+      last_name:
+        type: string
+        example: "Doe"
+      email:
+        type: string
+        example: "john@example.com"
+      salary:
+        type: number
+        format: float
+        example: 55000.00
+      address:
+        type: string
+        example: "123 Main St, Las Vegas, NV"
+
+  
+  CustomerInput:
+    type: object
+    required:
+      - first_name
+      - last_name
+      - email
+      - phone
+      - address
+    properties:
+      first_name: { type: string, example: "Jane" }
+      last_name: { type: string, example: "Smith" }
+      email: { type: string, example: "jane@example.com" }
+      phone: { type: string, example: "555-123-4567" }
+      address: { type: string, example: "456 Oak St, Las Vegas, NV" }
+
+  Customer:
+    type: object
+    properties:
+      id: { type: integer, example: 1 }
+      first_name: { type: string, example: "Jane" }
+      last_name: { type: string, example: "Smith" }
+      email: { type: string, example: "jane@example.com" }
+      phone: { type: string, example: "555-123-4567" }
+      address: { type: string, example: "456 Oak St, Las Vegas, NV" }
+
+  ServiceInput:
+    type: object
+    required:
+      - customer_id
+      - service_desc
+      - VIN
+      - service_date
+    properties:
+      customer_id: { type: integer, example: 1 }
+      service_desc: { type: string, example: "Oil change and tire rotation" }
+      price: { type: number, format: float, example: 125.50 }
+      VIN: { type: string, example: "1HGCM82633A123456" }
+      service_date: { type: string, format: date, example: "2025-09-01" }
+
+  Service:
+    type: object
+    properties:
+      id: { type: integer, example: 101 }
+      customer_id: { type: integer, example: 1 }
+      service_desc: { type: string, example: "Oil change and tire rotation" }
+      price: { type: number, format: float, example: 125.50 }
+      VIN: { type: string, example: "1HGCM82633A123456" }
+      service_date: { type: string, format: date, example: "2025-09-01" }
+
+  PartInput:
+    type: object
+    required:
+      - name
+      - price
+    properties:
+      name: { type: string, example: "Brake Pad" }
+      price: { type: number, format: float, example: 75.00 }
+
+  Part:
+    type: object
+    properties:
+      id: { type: integer, example: 5001 }
+      name: { type: string, example: "Brake Pad" }
+      price: { type: number, format: float, example: 75.00 }
