@@ -87,17 +87,18 @@ def delete_mechanic():
 @limiter.limit('50 per day')
 @token_required
 def update_mechanic(mechanic_id):
+ # pulled from token
     mechanic = db.session.get(Mechanics, mechanic_id)
     if not mechanic:
         return jsonify({"error": "Mechanic not found."}), 404
 
     try:
-        mechanic_data = mechanic_schema.load(request.json)  # allow partial updates
+        mechanic_data = mechanic_schema.load(request.json, partial=True)  # allow partial updates
     except ValidationError as e:
         return jsonify(e.messages), 400
-    
-    
-    mechanic_data['password'] = generate_password_hash(mechanic_data['password'])
+
+    if "password" in mechanic_data:
+        mechanic_data["password"] = generate_password_hash(mechanic_data["password"])
 
     for key, value in mechanic_data.items():
         setattr(mechanic, key, value)
