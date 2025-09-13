@@ -45,7 +45,7 @@ class TestMechanics(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('email', response.json)
         
-    def test_get_users(self): 
+    def test_get_mechanics(self): 
         response = self.client.get('/mechanics')
         print(response.json)
         self.assertEqual(response.status_code, 200)
@@ -98,7 +98,7 @@ class TestMechanics(unittest.TestCase):
 
     def test_get_nonexistent_mechanic(self):
     
-        response = self.client.get('/mechanics/9999')
+        response = self.client.get('/mechanics/200')
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json['error'], "Mechanic not found.")
 
