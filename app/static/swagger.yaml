@@ -244,7 +244,7 @@ paths: #information about routes
       summary: "Create a new service ticket"
       description: "Creates a new service record, token required"
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - in: "body"
           name: "body"
@@ -278,7 +278,7 @@ paths: #information about routes
       summary: "Assign mechanic to service"
       description: "Assigns a mechanic to a single service ticket, token required"
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - name: service_id
           in: path
@@ -302,7 +302,7 @@ paths: #information about routes
       summary: "Remove mechanic from ticket_mechanic"
       description: "Removes a mechanic from a service ticket, token required"
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - name: service_id
           in: path
@@ -326,7 +326,7 @@ paths: #information about routes
       summary: "Get tickets assigned to current mechanic"
       description: "Retrieves all service tickets assigned to the logged-in mechanic, token required, ID pulled from token"
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       responses:
         200:
           description: "List of mechanic’s tickets"
@@ -382,7 +382,7 @@ paths: #information about routes
       summary: "Add a new part"
       description: "creates a new part description, token required"
       security: 
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - in: "body"
           name: "body"
@@ -432,7 +432,7 @@ paths: #information about routes
       summary: "Update part"
       description: "updates single part based on ID, token required"
       security: 
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - name: "part_id"
           in: "path"
@@ -456,7 +456,7 @@ paths: #information about routes
       summary: "Delete part"
       description: "deletes single part from the system based on ID, token required"
       security: 
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
         - name: "part_id"
           in: "path"
