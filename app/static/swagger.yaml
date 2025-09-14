@@ -5,9 +5,9 @@ info:
   description: "Management from the shop's perspective"
   version: "0.0.1"
 
-host: "127.0.0.1:5000" #during development my API i on local host, will change in prod
+host: "mechanic-app-sr.onrender.com/" #during development my API i on local host, will change in prod
 schemes: 
-  - "http"
+  - "https"
 consumes: 
   - "application/json"
 produces: 
