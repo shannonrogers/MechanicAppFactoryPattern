@@ -54,9 +54,9 @@ class Services(Base):
 class Mechanics(Base):
     __tablename__ = 'mechanics'
     id: Mapped[int] = mapped_column(primary_key=True)
-    first_name: Mapped[str] = mapped_column(String(120), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(120), nullable=False)
-    email: Mapped[str] = mapped_column(String(360), unique=True, nullable=False)
+    first_name: Mapped[str] = mapped_column(String(500), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(500), nullable=False)
+    email: Mapped[str] = mapped_column(String(500), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(500), nullable=False)
     salary: Mapped[float] = mapped_column(Float, nullable=False)
     address: Mapped[str] = mapped_column(String(500), nullable=False)
