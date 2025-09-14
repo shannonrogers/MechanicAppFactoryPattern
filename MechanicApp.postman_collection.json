@@ -21,15 +21,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers"
 					]
@@ -55,15 +50,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers"
 					]
@@ -89,15 +79,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers/2",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers/2",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers",
 						"2"
@@ -121,15 +106,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers/3",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers/3",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers",
 						"3"
@@ -153,15 +133,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers/3",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers/3",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers",
 						"3"
@@ -185,15 +160,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics"
 					]
@@ -219,15 +189,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics"
 					]
@@ -253,15 +218,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics/3",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics/3",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics",
 						"3"
@@ -285,15 +245,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/parts/1",
-					"protocol": "http",
+					"raw": "{{baseURL}}/parts/1",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"parts",
 						"1"
@@ -317,15 +272,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics/4",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics/4",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics",
 						"4"
@@ -352,15 +302,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services"
 					]
@@ -383,15 +328,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services"
 					]
@@ -424,15 +364,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services/1/assign-mechanic/1",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services/1/assign-mechanic/1",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services",
 						"1",
@@ -458,15 +393,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services/2/remove-mechanic/7",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services/2/remove-mechanic/7",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services",
 						"2",
@@ -492,15 +422,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics/login",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics/login",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics",
 						"login"
@@ -537,15 +462,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services/my-tickets",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services/my-tickets",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services",
 						"my-tickets"
@@ -582,15 +502,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customers/searchcustomers/sophia.martinez@example.com",
-					"protocol": "http",
+					"raw": "{{baseURL}}/customers/searchcustomers/sophia.martinez@example.com",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"customers",
 						"searchcustomers",
@@ -615,15 +530,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/parts",
-					"protocol": "http",
+					"raw": "{{baseURL}}/parts",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"parts"
 					]
@@ -649,15 +559,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/parts",
-					"protocol": "http",
+					"raw": "{{baseURL}}/parts",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"parts"
 					]
@@ -680,15 +585,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/parts/1",
-					"protocol": "http",
+					"raw": "{{baseURL}}/parts/1",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"parts",
 						"1"
@@ -722,15 +622,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/mechanics",
-					"protocol": "http",
+					"raw": "{{baseURL}}/mechanics",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"mechanics"
 					]
@@ -763,15 +658,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services/1/assign-part/1",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services/1/assign-part/1",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services",
 						"1",
@@ -810,15 +700,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/services/get-parts/1",
-					"protocol": "http",
+					"raw": "{{baseURL}}/services/get-parts/1",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{baseURL}}"
 					],
-					"port": "5000",
 					"path": [
 						"services",
 						"get-parts",
@@ -827,6 +712,13 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
