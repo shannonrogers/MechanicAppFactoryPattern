@@ -34,7 +34,7 @@ def login():
 
 #create mechanic
 @mechanics_bp.route('', methods=['POST'])
-@limiter.limit('10 per day')
+# @limiter.limit('10 per day')
 
 def create_mechanic():
     try:
