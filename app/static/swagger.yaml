@@ -39,6 +39,10 @@ paths: #information about routes
           description: "Login Successful"
           schema: 
             $ref: "#/definitions/LoginResponse"
+          examples:
+            application/json:
+              message: "Welcome <First Name>"
+              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOj...
 
   /mechanics:
     post:
@@ -59,19 +63,36 @@ paths: #information about routes
           description: "Mechanic created successfully"
           schema:
             $ref: "#/definitions/Mechanic"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 2,
+              last_name: "Johnson"
+              password: "<encrypted password>"
+              salary: 60000.0
      
     get:
       tags:
         - Mechanics
-      summary: "Read all mechanics"
-      description: "Retrieve details for all mechanics"
+      summary: "Returns all mechanics"
+      description: "Endpoint to recieve an arry of mechanic objects"
       responses:
         200:
-          description: "List of Mechanic details"
+          description: "Successfully retrieved mechanics"
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Mechanic"
+            $ref: "#/definitions/Mechanic"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 2,
+              last_name: "Johnson"
+              password: "<encrypted password>"
+              salary: 60000.0
+
 
     delete:
       tags:
@@ -106,12 +127,21 @@ paths: #information about routes
           description: "Mechanic details"
           schema:
             $ref: "#/definitions/Mechanic"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 2,
+              last_name: "Johnson"
+              password: "<encrypted password>"
+              salary: 60000.0
 
     put:
       tags:
         - Mechanics
       summary: "Update mechanic"
-      description: "Update a mechanic’s details (requires token)."
+      description: "Update specific mechanic details (requires token)."
       security:
         - bearerAuth: []
       parameters:
@@ -130,25 +160,41 @@ paths: #information about routes
           description: "Mechanic updated successfully"
           schema:
             $ref: "#/definitions/Mechanic"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 2,
+              last_name: "Johnson"
+              password: "<encrypted password>"
+              salary: 60000.0
 
   /customers:
     get:
       tags:
         - Customers
       summary: "returns all customers"
+      description: "Endpoint to recieve an arry of customer objects"
       responses:
         200:
-          description: "List of customer details"
+          description: "successfully retrieved customers"
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Customer"
+            $ref: "#/definitions/Customer"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 1,
+              last_name: "Johnson"
+              phone: "555-123-4567"
 
     post:
       tags:
         - Customers
       summary: "Create a new customer"
-      description: "Creates a new customer using data submitted, token required"
+      description: "Creates a new customer account, token required"
       security:
         - bearerAuth: []
       parameters:
@@ -163,23 +209,39 @@ paths: #information about routes
           description: "Customer created"
           schema:
             $ref: "#/definitions/Customer"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 1,
+              last_name: "Johnson"
+              phone: "555-123-4567"
 
   /customers/{customer_id}:
     get:
       tags:
         - Customers
       summary: "Get customer by ID"
-      description: "Returns a single customer based on ID"
+      description: "Retrieve a specific customer based on ID passed in"
       parameters:
-        - name: "customer_id"
-          in: "path"
+        - in: "path"
+          name: "customer_id"
           required: true
           type: integer
       responses:
         200:
-          description: "Returns customer details"
+          description: "Customer details"
           schema:
-            $ref: "#/definitions/Customer"
+            $ref: "#/definitions/Mechanic"
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 1,
+              last_name: "Johnson"
+              phone: "555-123-4567"
       
     put:
       tags:
@@ -235,7 +297,15 @@ paths: #information about routes
         200:
           description: "Returns customer details"
           schema:
-            $ref: "#/definitions/Customer"
+            $ref: "#/definitions/Customer
+          examples:
+            application/json: 
+              address: "123 Maple St, Springfield, IL, 62701"
+              email: "Tony.johnson@example.com"
+              first_name: "Tony"
+              id: 1,
+              last_name: "Johnson"
+              phone: "555-123-4567"
 
   /services:
     post:
@@ -257,6 +327,14 @@ paths: #information about routes
           description: "Returns service details"
           schema:
             $ref: "#/definitions/Service"
+          examples: 
+            application/json: 
+              VIN: "2C4RDGBG5ER123456"
+              customer_id: 1
+              id: 1
+              price: 300.0
+              service_date: "2025-08-22"
+              service_desc: "Engine diagnostic and tune-up"
 
     get:
       tags:
@@ -270,6 +348,15 @@ paths: #information about routes
             type: array
             items:
               $ref: "#/definitions/Service"
+          examples: 
+            application/json: 
+              VIN: "2C4RDGBG5ER123456"
+              customer_id: 1
+              id: 1
+              price: 300.0
+              service_date: "2025-08-22"
+              service_desc: "Engine diagnostic and tune-up"
+
 
   /services/{service_id}/assign-mechanic/{mechanic_id}:
     put:
@@ -293,6 +380,9 @@ paths: #information about routes
           description: "Mechanic add to ticket ID"
           schema:
             $ref: "#/definitions/Service"
+          examples: 
+            application/json:
+              message: "John Doe added to service ID 1"
 
 
   /services/{service_id}/remove-mechanic/{mechanic_id}:
@@ -317,6 +407,9 @@ paths: #information about routes
           description: "Mechanic removed from ticket ID"
           schema:
             $ref: "#/definitions/Service"
+          examples: 
+            application/json: 
+              message: "John Doe removed from service ID 1"
 
 
   /services/my-tickets:
@@ -334,6 +427,14 @@ paths: #information about routes
             type: array
             items:
               $ref: "#/definitions/Service"
+          exmaples: 
+            application/json: 
+              VIN: "2C4RDGBG5ER123456",
+              customer_id: 1,
+              id: 1,
+              price: 300.0,
+              service_date: "2025-08-22",
+              service_desc: "Engine diagnostic and tune-up"
 
   /services/{service_id}/assign-part/{part_id}:
     put:
@@ -355,13 +456,16 @@ paths: #information about routes
           description: "Part added to service ID"
           schema:
             $ref: "#/definitions/Service"
+          examples: 
+            application/json: 
+              message: "muffler added to service ID 1"
 
   /services/get-parts/{service_id}:
     get:
       tags:
         - Services
       summary: "Get parts assigned to a service ticket"
-      description: "Retrieves all parts linked to a specific service ticket based on service ID"
+      description: "Retrieves array of parts objects linked to a specific service ticket based on service ID"
       parameters:
         - name: service_id
           in: path
@@ -374,6 +478,11 @@ paths: #information about routes
             type: array
             items:
               $ref: "#/definitions/Part"
+          examples: 
+            application/json: 
+              id: 1,
+              name: "muffler"
+              price: 160.0
 
   /parts:
     post:
@@ -394,6 +503,11 @@ paths: #information about routes
           description: "Returns new part details"
           schema:
             $ref: "#/definitions/Part"
+          examples: 
+            application/json: 
+              id: 2,
+              name: "alternator"
+              price: 320.0
 
     get:
       tags:
@@ -425,6 +539,12 @@ paths: #information about routes
           description: "Part details"
           schema:
             $ref: "#/definitions/Part"
+          examples: 
+            application/json: 
+              id: 2,
+              name: "alternator"
+              price: 320.0
+          
 
     put:
       tags:
@@ -449,6 +569,11 @@ paths: #information about routes
           description: "Part details updated"
           schema:
             $ref: "#/definitions/Part"
+          examples: 
+            application/json: 
+              id: 2,
+              name: "alternator"
+              price: 320.0
 
     delete:
       tags:
@@ -465,6 +590,11 @@ paths: #information about routes
       responses:
         200:
           description: "Successfully deleted part"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
 
 definitions: #information about data received/produced
 
