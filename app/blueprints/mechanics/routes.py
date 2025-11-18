@@ -19,18 +19,18 @@ def login():
 
     mechanic = db.session.query(Mechanics).where(Mechanics.email==data['email']).first()
 
+    if not mechanic or not check_password_hash(mechanic.password, data['password']):
+        return jsonify({"error": "Invalid email or password"}), 403
+
     if mechanic and check_password_hash(mechanic.password, data['password']): 
         token = encode_token(mechanic.id)
         return jsonify({
+            "mechanic": mechanic_schema.dump(mechanic),
             "message": f"Welcome {mechanic.first_name}",
             "token": token
         }), 200
+
     
-    return jsonify("Invalid email or password"), 403
-
-
-
-
 
 #create mechanic
 @mechanics_bp.route('', methods=['POST'])

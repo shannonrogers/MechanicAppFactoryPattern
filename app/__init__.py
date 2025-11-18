@@ -6,6 +6,7 @@ from .blueprints.mechanics import mechanics_bp
 from .blueprints.services import services_bp
 from .blueprints.inventory import parts_bp
 from flask_swagger_ui import get_swaggerui_blueprint
+from flask_cors import CORS
 
 SWAGGER_URL = '/api/docs'
 API_URL = '/static/swagger.yaml'
@@ -18,6 +19,7 @@ swagger_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config={'app_n
 def create_app(config_name): 
     app = Flask(__name__)
     app.config.from_object(f'config.{config_name}')
+    CORS(app)
 
     #intialize extensions
     ma.init_app(app)
